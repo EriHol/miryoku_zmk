@@ -369,9 +369,10 @@ jobs:
           echo "::endgroup::"
           
       - name: Prepare Artifact Name
+        shell: bash
         run: |
           ORIGINAL_NAME=${{ steps.main.outputs.run_name }}
-          SAFE_NAME=$(echo "${ORIGINAL_NAME//\//-}")
+          SAFE_NAME="${ORIGINAL_NAME//\/\/zmk/}"
           echo "SAFE_NAME=$SAFE_NAME" >> $GITHUB_ENV
   
       - name: upload
